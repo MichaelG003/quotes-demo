@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Feedback({ quoteId, onSend, baseUrl }) {
   const send = async (type) => {
     try {
@@ -23,12 +21,15 @@ export default function Feedback({ quoteId, onSend, baseUrl }) {
   };
 
   return (
-    <div className="flex gap-3 mt-4 justify-center">
-      <button className="btn" onClick={() => send("like")}>
+    <div className="flex gap-4 justify-center">
+      <button
+        className="px-5 py-2 bg-green-400 hover:bg-green-500 text-white font-bold rounded-full shadow-md transition-all duration-200"
+        onClick={() => send("like")}
+      >
         👍 Me gusta
       </button>
       <button
-        className="btn bg-gray-200 text-black"
+        className="px-5 py-2 bg-red-400 hover:bg-red-500 text-white font-bold rounded-full shadow-md transition-all duration-200"
         onClick={() => send("meh")}
       >
         😐 Meh

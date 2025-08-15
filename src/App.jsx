@@ -11,47 +11,59 @@ export default function App() {
   const [msg, setMsg] = useState("");
 
   const fetchQuote = async () => {
-    setMsg("Cargando...");
+    setMsg("⏳ Cargando...");
     setQuote(null);
     try {
       const res = await fetch(`${BASE_URL}`, { method: "GET" });
       const data = await res.json();
       if (!res.ok) {
-        // manejar error devuelto por la Function
-        setMsg(`Error API: ${data.error || data.message || res.statusText}`);
+        setMsg(`❌ Error API: ${data.error || data.message || res.statusText}`);
         return;
       }
       setQuote(data);
       setMsg("");
     } catch (e) {
       console.error("fetchQuote error:", e);
-      setMsg("Error de red al obtener la frase.");
+      setMsg("⚠️ Error de red al obtener la frase.");
     }
   };
 
   const handleFeedback = (resp) => {
-    if (resp?.ok) setMsg("Gracias por tu feedback");
-    else setMsg("Error enviando feedback");
+    if (resp?.ok) setMsg("✅ ¡Gracias por tu feedback!");
+    else setMsg("⚠️ Error enviando feedback");
     setTimeout(() => setMsg(""), 3000);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-blue-400 to-indigo-500">
-      <div className="text-center">
-        <h1 className="text-white text-2xl mb-6 font-bold">Random Quotes</h1>
-        <div className="mb-4">
-          <button className="btn" onClick={fetchQuote}>
-            Obtener frase
-          </button>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-6">
+      <div className="bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-full max-w-lg text-center border border-white/30">
+        <h1 className="text-white text-3xl font-extrabold mb-6 drop-shadow-lg">
+          🌟 Random Quotes
+        </h1>
+
+        <button
+          className="px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-black font-bold rounded-full shadow-md transition-all duration-200"
+          onClick={fetchQuote}
+        >
+          Obtener frase
+        </button>
+
+        {msg && (
+          <p className="mt-4 text-white font-medium animate-pulse">{msg}</p>
+        )}
+
+        <div className="mt-6">
+          <QuoteCard quote={quote} />
         </div>
-        {msg && <p className="text-white mb-4">{msg}</p>}
-        <QuoteCard quote={quote} />
+
         {quote && (
-          <Feedback
-            quoteId={quote.id}
-            onSend={handleFeedback}
-            baseUrl={BASE_URL}
-          />
+          <div className="mt-4">
+            <Feedback
+              quoteId={quote.id}
+              onSend={handleFeedback}
+              baseUrl={BASE_URL}
+            />
+          </div>
         )}
       </div>
     </div>
