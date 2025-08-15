@@ -35,9 +35,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-6">
-      <div className="bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-full max-w-lg text-center border border-white/30">
-        <h1 className="text-white text-3xl font-extrabold mb-6 drop-shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 font-sans p-6">
+      <div className="bg-white/20 backdrop-blur-md rounded-2xl shadow-lg p-8 w-full max-w-lg text-center border border-white/30">
+        <h1 className="text-white text-3xl font-bold mb-6 drop-shadow-lg">
           🌟 Random Quotes
         </h1>
 
@@ -48,9 +48,7 @@ export default function App() {
           Obtener frase
         </button>
 
-        {msg && (
-          <p className="mt-4 text-white font-medium animate-pulse">{msg}</p>
-        )}
+        {msg && <p className="mt-4 text-white font-medium">{msg}</p>}
 
         <div className="mt-6">
           <QuoteCard quote={quote} />
